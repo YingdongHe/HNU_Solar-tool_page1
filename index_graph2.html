@@ -1,0 +1,313 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Thermal comfort model: Graph 2</title>
+<!-- load css -->
+<link rel="stylesheet" href="./lib/css/bootstrap/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="./lib/css/epwvis.css" type="text/css"/>
+
+<!-- load javascript libraries -->
+<script type="text/javascript" src="./lib/js/jQuery/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="./lib/js/bootstrap/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="./lib/js/d3/d3.min.js"></script> -->
+<script type="text/javascript" src="./lib/js/epw2json.js"></script>
+<script type="text/javascript" src="./lib/js/contour.js"></script>
+<script type="text/javascript" src="./lib/js/epwCharts.js"></script>
+<script type="text/javascript" src="./lib/js/HNUSolarModel.js"></script>
+<script type="text/javascript" src="./lib/js/Result_generation.js"></script>
+
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-contour.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale.v1.min.js"></script>
+<script src='https://cdn.plot.ly/plotly-2.2.0.min.js'></script>
+
+<style>
+	html {
+        position: relative;
+        min-height: 100%;
+    }
+	body {
+		background-color: white;
+		font-family: sans-serif;
+    	font-weight: normal;
+        margin-bottom: 60px;
+	}
+	.heading{
+    	font-size: 14px;
+    	font-weight: normal;
+        font-style: italic;
+	}
+    .upload-drop-zone {
+      height: 60;
+      width: 200;
+      border-width: 2px;
+      margin-bottom: 5px;
+      color: #ccc;
+      border-style: dashed;
+      border-color: #ccc;
+      line-height: 60px;
+      text-align: center;
+    }
+    .upload-drop-zone.drop {
+      color: #4169E1;
+      border-color: #4169E1;
+    }
+	a:link {
+      color: steelblue;
+	}
+	a:visited {
+	  color: grey;
+	}
+	a:hover {
+	  color: black;
+	}
+    #epwChartDiv {
+      display: none;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      height: 40px;
+      background-color: #f5f5f5;
+    }
+    label{
+            width: 200px;
+            /* display: inline-block; */
+            text-align: right;
+            padding-right: 0px;
+            font-weight: bold;
+        }
+.div-a{ float:left;width:40%;} 
+.div-b{ float:left;width:40%;} 
+
+</style>
+
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <span>
+              <h3>Thermal comfort model: Graph 2
+                <span class="heading"> - An online calcuation tool</span>
+                <div class = "heading" style="position:relative;top:5px">
+                  <input type="button" value="Back to Main" onclick="javascrtpt: window.location.href = 'file:///Users/jingyuan/Desktop/yingdong/Thermal%20comfort%20tool/index.html'"/>
+                  <input type="button" value="Make new graph" onclick="javascrtpt: window.location.href = 'file:///Users/jingyuan/Desktop/yingdong/Thermal%20comfort%20tool/index_graph2.html'"/></div>
+
+                </h3>
+              </h3>
+              </span>            
+          </div>
+        </div>
+      </nav>
+    </header> <!-- header -->
+
+    <!-- side bar navigation -->
+<!--     <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav in" id="side-menu">
+                <li>
+                    <a href="#TemperatureFloodplot">Temperature Floodplot</a>
+                </li>
+                <li>
+                    <a href="#Filter">Filter</a>
+                </li>
+                <li>
+                    <a href="#Windrose">Windrose</a>
+                </li>
+            </ul>
+        </div>
+    </div> -->
+
+    <!-- page wrapper -->
+    <h3>Graph 2: Generate values of different indoor locations at a certain hour</h3>
+    <br>
+<!-- Position, Width, Height, Bottom, Tsol, Rfloor, dh, Distance, bodydirection, -->
+<div ><img style="width:30%" src="./lib/fig/Fig3.png"></div>
+<h4>Input Variables:</h4>
+<div>
+    <div class="div-a">
+        <div><label>Position: </label><input placeholder="Window direction (1, 2, 3, or 4" type="text" id="input11" maxlength="10"></div> 
+        <div><label>Width: </label><input placeholder="Window width" type="text" id="input12" maxlength="10"></div> 
+        <div> <label>Height: </label><input placeholder="Window height" type="text" id="input13" maxlength="10"> </div>
+        <div><label>Bottom: </label><input placeholder="Window still height" type="text" id="input14" maxlength="10"></div>
+        <div><label>Tsol: </label><input placeholder="Window transmittance" type="text" id="input15" maxlength="10"></div>
+    
+      </div>
+    <div class="div-b">
+      
+    <div><label>Rfloor: </label><input placeholder="Floor reflection ratio" type="text" id="input16" maxlength="10"></div>
+    <div><label>Hour: </label><input placeholder="The ith hour of a year" type="text" id="input17" maxlength="10"></div>
+    <div><label>Body Direction: </label><input placeholder="Body direction" type="text" id="input18" maxlength="10"></div>
+    <div><label>Clothing Absorptivity: </label><input  placeholder="Clothing absorptivity" type="text" id="input19" maxlength="10"></div>
+</div>
+
+
+<br>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                
+                    <!-- second nav bar -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                          <li>
+                          <br>
+                          <br>
+                          
+                            Select EPW File and generate the graph:<input type="file" id="fileinput" style="width:200px;"></input>
+                          </li> 
+                        </ul>
+                       
+                        
+                    </div>  <!-- second nav bar -->
+                  
+                    <h3 id="stationName"></h3>
+                        <div id="Plot2">
+                          <h3>Test plot: delta MRT</h3>
+                          <div style="width:800px; height:800px"id="myDiv"></div>
+                        </div>
+                    </div>
+                    
+                </div>                    
+            </div>
+        </div>
+      </div> 
+      <HR style="border:3 double #987cb9" width="100%" color=#987cb9 SIZE=3></HR>
+    
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <p>Source code is available under an MIT license on <a href="https://github.com/mdahlhausen/epwvis" rel="link">Github</a>.  Please provide <a href="https://github.com/mdahlhausen/epwvis/issues" rel="link">feedback, report issues, and request graphs you would like to see here</a>.</p>
+      </div>
+    </footer> <!-- footer -->
+</div> <!-- end page elements-->
+
+<script type="text/javascript">
+  //from: http://www.html5rocks.com/en/tutorials/file/dndfiles/
+  
+  //global variables
+  var epw = {};
+  var unitSystem = "SI";
+  
+  function unique (arr) {
+  return Array.from(new Set(arr))
+    }
+  
+  function listToMatrix(list, elementsPerSubArray) {
+  var matrix = [], i, k;
+
+  for (i = 0, k = -1; i < list.length; i++) {
+      if (i % elementsPerSubArray === 0) {
+          k++;
+          matrix[k] = [];
+      }
+
+      matrix[k].push(list[i]);
+  }
+
+  return matrix;
+}
+
+
+  function updateCharts(epw,unitSystem) {
+    console.log("drawing charts in " + unitSystem + " units");
+    clearEPWCharts();
+    $("#epwChartDiv").show();
+
+
+      var field11 = document.getElementById("input11").value;
+      var field12 = document.getElementById("input12").value;
+      var field13 = document.getElementById("input13").value;
+      var field14 = document.getElementById("input14").value;
+      var field15 = document.getElementById("input15").value;
+      var field16 = document.getElementById("input16").value;
+      var field17 = document.getElementById("input17").value;
+      var field18 = document.getElementById("input18").value;
+      var field19 = document.getElementById("input19").value;
+
+      var result = Mode2(parseFloat(field17), parseFloat(field11),parseFloat(field12),parseFloat(field13),parseFloat(field14),parseFloat(field15),parseFloat(field16),parseFloat(field18),parseFloat(field19),epw.diffuseHorizontalRadiation, epw.directNormalRadiation, epw);
+
+      console.log(result)
+      var valuess = result.map(function(value,index) { return value.value; })
+      var numberss = valuess.length/7
+      var matrix = listToMatrix(valuess, numberss);
+      console.log(matrix) 
+
+      var data = [{
+        z: matrix,
+        x: unique(result.map(function(value,index) { return value.x; })),
+        y: [0.5, 1, 1.5, 2, 2.5, 3, 3.5],
+        type: 'contour'
+      }];
+
+      var layout = {
+        title: 'Setting the X and Y Coordinates in a Contour Plot'
+      };
+
+      Plotly.newPlot('myDiv', data, layout);
+    };  
+        
+    function readSingleFile(file) {
+        var f = file;
+        if (f) {
+          var r = new FileReader();
+        r.onloadstart = function(e) {
+            clearEPWCharts();
+          document.getElementById('fileinput').innerHTML = "parsing file...";
+        };
+          r.onload = function(e) {
+            // read in file
+            var contents = e.target.result;
+            var raw = r.result;
+            
+            // parse file to an epw json object
+            epw = epw2json(raw);
+            
+        //console.log(epw);
+        
+        document.getElementById('stationName').innerHTML = "Location: " + epw.stationLocation;
+            updateCharts(epw, unitSystem)
+        };
+          r.readAsText(f);
+        } else { 
+          alert("Failed to load file");
+        }
+      };
+
+      fileInput = document.getElementById('fileinput');
+      
+      fileInput.onchange = function(evt) {
+    readSingleFile(evt.target.files[0]);
+
+  };  
+  
+  
+</script>
+
+<script>
+  //google analytics
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-80247337-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
