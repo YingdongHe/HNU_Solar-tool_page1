@@ -1,6 +1,6 @@
 # HNU Solar Online Tool. Mode 1
 -----------------------
-This is Mode 1 of the HNU Solar Online Tool. This mode calculates whole-year hourly values of a certain indoor location.
+This is Mode 1 of the HNU Solar Online Tool. This mode calculates whole-year hourly Delta MRT values of a certain indoor location.
 
 This tool is developed by Yingdong He and Jing Yuan, at University of California, Berkeley.
 
