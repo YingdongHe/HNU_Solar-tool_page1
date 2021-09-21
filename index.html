@@ -211,7 +211,7 @@
   var unitSystem = "SI";
 
   function updateCharts(epw,unitSystem) {
-    console.log("drawing charts in " + unitSystem + " units");
+    //console.log("drawing charts in " + unitSystem + " units");
     clearEPWCharts();
     $("#epwChartDiv").show(); //unhide
     var field1 = document.getElementById("input1").value;
@@ -288,7 +288,7 @@
       var field9 = document.getElementById("input9").value;
       var field10 = document.getElementById("input10").value;
 
-      #var result = Mode1(parseFloat(field1),parseFloat(field2),parseFloat(field3),parseFloat(field4),parseFloat(field5),parseFloat(field6),parseFloat(field7),parseFloat(field8),parseFloat(field9),parseFloat(field10),epw.diffuseHorizontalRadiation, epw.directNormalRadiation, epw.);
+      //var result = Mode1(parseFloat(field1),parseFloat(field2),parseFloat(field3),parseFloat(field4),parseFloat(field5),parseFloat(field6),parseFloat(field7),parseFloat(field8),parseFloat(field9),parseFloat(field10),epw.diffuseHorizontalRadiation, epw.directNormalRadiation, epw.);
       var result = parseFloat(field1)+parseFloat(field2)
 
       if (!isNaN(result)) {
